@@ -1,0 +1,152 @@
+<style>
+    .my-drop-zone { border: dotted 3px lightgray; }
+    .nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+    .another-file-over-class { border: dotted 3px green; }
+ 
+    html, body { height: 100%; }
+</style>
+<form [formGroup]="uploadForm" class="File" id="File">
+<label for="filetype">Filetype (Required) : </label>
+    <md-select
+        ng-model="detail.filetype"
+        id="filetype"
+        formControlName="filetype">
+            <md-option
+                *ngFor="let filetype of filetypes"
+                [value]="filetype">
+                    {{filetype}}
+            </md-option>
+    </md-select>
+    <br/>
+    <br/>
+    
+<label for="course code">Depatrment code (Required) :</label>
+<md-input-container>      
+         <input mdInput
+        ng-model="detail.course"
+        list="courses"
+        name="course"
+        onfocus="this.value = this.value=='Select Course'?'':this.value;" 
+        onblur="this.value = this.value==''?'Select Course':this.value;" 
+        placeholder="Select Department"
+        id="course"
+        formControlName="department"
+        required>
+            <datalist id="courses">
+                <option *ngFor="let course of courses" value="{{course}}">
+            </datalist>
+</md-input-container>
+<label for="Course Code"> Course Code (Required) :</label>
+ <md-input-container>
+    <input mdInput type="text"  placeholder="Course Code, eg-101 or 201" id="course" formControlName="course" />      
+ </md-input-container>
+<br/>
+ <br/>
+<label for="Academic Year">Academic Session (Required) :</label>
+ 
+ <md-input-container>
+    <input mdInput type="text"  placeholder="Session, eg-2016-17" id="session" formControlName="session" ng-model="detail.session"  />      
+ </md-input-container>
+   
+<label for="semester">Semester (Required) : </label>
+    <select
+        id="semester" ng-model="detail.semester"
+        formControlName="semester" >
+            <option>Select Semester</option>
+            <option>I</option>
+            <option>II</option>
+            <option>Summer Term</option>
+    </select>
+    
+
+ </form>
+<div class="container">
+ 
+    
+    <div class="row">
+ 
+        <div class="col-md-3">
+ 
+            <h3>Select files</h3>
+           
+            <input type="file" ng2FileSelect [uploader]="uploader" multiple  /><br/>
+ 
+            
+        </div>
+ 
+        <div class="col-md-9" style="margin-bottom: 40px">
+ 
+            <h3>Upload queue</h3>
+            <p>Queue length: {{ uploader?.queue?.length }}</p>
+ 
+            <table class="table">
+                <thead>
+                <tr>
+                    <th width="50%">Name</th>
+                   
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of uploader.queue">
+                    <td><strong>{{ item?.file?.name }}</strong></td>
+                    <td *ngIf="uploader.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+                    <td *ngIf="uploader.isHTML5">
+                        <div class="progress" style="margin-bottom: 0;">
+                            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                        <span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                        <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                    </td>
+                    <td nowrap>
+                        
+                        <button type="button" class="btn btn-danger btn-xs"
+                                (click)="item.remove()">
+                            <span class="glyphicon glyphicon-trash"></span> Remove
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="description">
+    <br/>
+    <label for="description">Description (Optional but recommended) :</label>
+        <textarea  
+            id="description"  
+            rows="5" 
+            class="form-control"
+            placeholder="Optional">
+        </textarea>
+</div>
+ 
+            <div>
+                <div>
+                    Queue progress:
+                    <div class="progress" >
+                        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-success btn-s"
+                        (click)="uploader.uploadAll() && Upload()" [disabled]="!uploader.getNotUploadedItems().length || !uploadForm.valid">
+                    <span class="glyphicon glyphicon-upload"></span> Upload all
+                </button>
+                <button type="button" class="btn btn-warning btn-s"
+                        (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
+                    <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+                </button>
+                <button type="button" class="btn btn-danger btn-s"
+                        (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                    <span class="glyphicon glyphicon-trash"></span> Remove all
+                </button>
+            </div>
+ 
+        </div>
+ 
+    </div>
+ 
+</div>
+

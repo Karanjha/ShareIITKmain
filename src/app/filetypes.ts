@@ -1,0 +1,1 @@
+export const Filetypes: string[] = ['Select Type','Book','Assignment','Notes','Quiz'];
