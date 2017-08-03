@@ -1,12 +1,12 @@
-    <table class="files" cellspacing="500">
+    <table class="files" cellspacing="20">
     
     <tr *ngFor="let file of files">
-     <td id="file-name">{{file.name}}</td>  
+     <td >{{file.name}}</td>  
      <td>{{file.course}}</td>
      <td>{{file.type}}</td>
      <td>{{file.session}}</td>
      <td>{{file.semester}}</td>
-     <td> <a (click)="onSelect(file)">Download</a> <td>  
+     <td> <a (click)="onSelect(file)">Download</a> </td>  
       </tr>
     
     

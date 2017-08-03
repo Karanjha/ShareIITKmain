@@ -6,6 +6,8 @@ import {CoursesService} from './courses.service';
 import {uploadValidators} from './uploadValidators';
 import {SearchService} from './search.service';
 import {MdSelectModule} from '@angular/material';
+import {MdInputModule} from '@angular/material';
+import {MdButtonModule} from '@angular/material';
 
 // const URL = '/api/';
   const URL = 'http://localhost:8082/resources/upload';

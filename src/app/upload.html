@@ -49,17 +49,14 @@
  </md-input-container>
    
 <label for="semester">Semester (Required) : </label>
-    <select
-        id="semester" ng-model="detail.semester"
+    <md-select
         formControlName="semester" >
-            <option>Select Semester</option>
-            <option>I</option>
-            <option>II</option>
-            <option>Summer Term</option>
-    </select>
-    
-
- </form>
+            <md-option>Select Semester</md-option>
+            <md-option>I</md-option>
+            <md-option>II</md-option>
+            <md-option>Summer Term</md-option>
+    </md-select>
+</form>
 <div class="container">
  
     
@@ -113,14 +110,17 @@
             </table>
 
             <div class="description">
-    <br/>
+    
     <label for="description">Description (Optional but recommended) :</label>
-        <textarea  
+    <br/>
+     <md-input-container>   
+       <textarea mdInput 
             id="description"  
             rows="5" 
             class="form-control"
             placeholder="Optional">
         </textarea>
+     </md-input-container>
 </div>
  
             <div>
@@ -130,15 +130,15 @@
                         <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-success btn-s"
+                <button type="button" md-button color="warn"
                         (click)="uploader.uploadAll() && Upload()" [disabled]="!uploader.getNotUploadedItems().length || !uploadForm.valid">
                     <span class="glyphicon glyphicon-upload"></span> Upload all
                 </button>
-                <button type="button" class="btn btn-warning btn-s"
+                <button type="button" md-button color="warn"
                         (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
                     <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
                 </button>
-                <button type="button" class="btn btn-danger btn-s"
+                <button type="button" md-button color="warn"
                         (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
                     <span class="glyphicon glyphicon-trash"></span> Remove all
                 </button>
