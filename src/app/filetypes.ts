@@ -1,1 +1,1 @@
-export const Filetypes: string[] = ['Select Type','Book','Assignment','Notes','Quiz'];
+export const Filetypes: string[] = ['Select Filetype','Book','Assignment','Notes','Quiz'];

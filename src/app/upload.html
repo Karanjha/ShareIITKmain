@@ -5,148 +5,59 @@
  
     html, body { height: 100%; }
 </style>
+<br/>
 <form [formGroup]="uploadForm" class="File" id="File">
-<label for="filetype">Filetype (Required) : </label>
+<label for="filetype">Filetype (Required) :</label>
     <md-select
         ng-model="detail.filetype"
         id="filetype"
-        formControlName="filetype">
+        formControlName="filetype"
+        placeholder="Select Filetype">
             <md-option
                 *ngFor="let filetype of filetypes"
                 [value]="filetype">
                     {{filetype}}
             </md-option>
     </md-select>
-    <br/>
-    <br/>
-    
-<label for="course code">Depatrment code (Required) :</label>
-<md-input-container>      
-         <input mdInput
-        ng-model="detail.course"
-        list="courses"
-        name="course"
-        onfocus="this.value = this.value=='Select Course'?'':this.value;" 
-        onblur="this.value = this.value==''?'Select Course':this.value;" 
-        placeholder="Select Department"
-        id="course"
-        formControlName="department"
-        required>
-            <datalist id="courses">
-                <option *ngFor="let course of courses" value="{{course}}">
-            </datalist>
-</md-input-container>
-<label for="Course Code"> Course Code (Required) :</label>
- <md-input-container>
-    <input mdInput type="text"  placeholder="Course Code, eg-101 or 201" id="course" formControlName="course" />      
- </md-input-container>
-<br/>
- <br/>
-<label for="Academic Year">Academic Session (Required) :</label>
- 
- <md-input-container>
-    <input mdInput type="text"  placeholder="Session, eg-2016-17" id="session" formControlName="session" ng-model="detail.session"  />      
- </md-input-container>
-   
+
+&emsp;&emsp;    
+
 <label for="semester">Semester (Required) : </label>
     <md-select
-        formControlName="semester" >
-            <md-option>Select Semester</md-option>
-            <md-option>I</md-option>
-            <md-option>II</md-option>
-            <md-option>Summer Term</md-option>
+        formControlName="semester" placeholder="Select Semester" >
+            <md-option *ngFor="let semester of semesters" [value]="semester" >{{semester}}</md-option>
     </md-select>
+
+&emsp;&emsp;    
+
+
+<label for="Academic Year">Academic Session (Required) :</label>
+ 
+<md-input-container>
+   <input mdInput type="text"  placeholder="Session, eg-2016-17" id="session" formControlName="session" ng-model="detail.session"  />      
+</md-input-container>
+
+&emsp;&emsp;
+
+<div>
+    <label> Depatrment code (Required) :</label>
+    <md-input-container>
+        <input  type="text" mdInput formControlName="department" [mdAutocomplete]="auto" placeholder="Select Department" required>
+        <md-autocomplete #auto="mdAutocomplete">
+        <md-option *ngFor="let course of courses" [value]="course">
+            {{ course }}
+        </md-option>
+    </md-autocomplete>   
+    </md-input-container>
+
+<label > Course Code (Required) :</label>
+ <md-input-container>
+    <input mdInput type="text"  placeholder="Course Code, eg-101 or 201" formControlName="course" />      
+ </md-input-container>
+
+<br/>
+<br/>
+<br/>
+</div>
+
 </form>
-<div class="container">
- 
-    
-    <div class="row">
- 
-        <div class="col-md-3">
- 
-            <h3>Select files</h3>
-           
-            <input type="file" ng2FileSelect [uploader]="uploader" multiple  /><br/>
- 
-            
-        </div>
- 
-        <div class="col-md-9" style="margin-bottom: 40px">
- 
-            <h3>Upload queue</h3>
-            <p>Queue length: {{ uploader?.queue?.length }}</p>
- 
-            <table class="table">
-                <thead>
-                <tr>
-                    <th width="50%">Name</th>
-                   
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let item of uploader.queue">
-                    <td><strong>{{ item?.file?.name }}</strong></td>
-                    <td *ngIf="uploader.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
-                    <td *ngIf="uploader.isHTML5">
-                        <div class="progress" style="margin-bottom: 0;">
-                            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
-                        </div>
-                    </td>
-                    <td class="text-center">
-                        <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
-                        <span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
-                        <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
-                    </td>
-                    <td nowrap>
-                        
-                        <button type="button" class="btn btn-danger btn-xs"
-                                (click)="item.remove()">
-                            <span class="glyphicon glyphicon-trash"></span> Remove
-                        </button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-
-            <div class="description">
-    
-    <label for="description">Description (Optional but recommended) :</label>
-    <br/>
-     <md-input-container>   
-       <textarea mdInput 
-            id="description"  
-            rows="5" 
-            class="form-control"
-            placeholder="Optional">
-        </textarea>
-     </md-input-container>
-</div>
- 
-            <div>
-                <div>
-                    Queue progress:
-                    <div class="progress" >
-                        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
-                    </div>
-                </div>
-                <button type="button" md-button color="warn"
-                        (click)="uploader.uploadAll() && Upload()" [disabled]="!uploader.getNotUploadedItems().length || !uploadForm.valid">
-                    <span class="glyphicon glyphicon-upload"></span> Upload all
-                </button>
-                <button type="button" md-button color="warn"
-                        (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
-                    <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
-                </button>
-                <button type="button" md-button color="warn"
-                        (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
-                    <span class="glyphicon glyphicon-trash"></span> Remove all
-                </button>
-            </div>
- 
-        </div>
- 
-    </div>
- 
-</div>
-

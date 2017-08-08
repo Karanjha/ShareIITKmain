@@ -16,6 +16,7 @@ import {MdToolbarModule} from '@angular/material';
 import {MdInputModule} from '@angular/material';
 import {MdSelectModule} from '@angular/material';
 import {MdTableModule} from '@angular/material';
+import {MdAutocompleteModule} from '@angular/material';
 import 'hammerjs';
 
 @NgModule({
@@ -39,9 +40,10 @@ import 'hammerjs';
     MdToolbarModule,
     MdInputModule,
     MdSelectModule,
-    MdTableModule
+    MdTableModule,
+    MdAutocompleteModule
 ],
-  exports:[MdButtonModule, MdInputModule, MdToolbarModule, MdSelectModule, MdTableModule], 
+  exports:[MdButtonModule, MdInputModule, MdToolbarModule, MdSelectModule, MdTableModule,MdAutocompleteModule], 
   providers: [CoursesService,SearchService],
   bootstrap: [AppComponent]
 })

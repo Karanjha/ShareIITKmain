@@ -8,7 +8,11 @@ import {SearchService} from './search.service';
 import {MdSelectModule} from '@angular/material';
 import {MdInputModule} from '@angular/material';
 import {MdButtonModule} from '@angular/material';
+import {MdTableModule} from '@angular/material';
+import {MdAutocompleteModule} from '@angular/material';
 
+
+import {Semester} from './semester';
 // const URL = '/api/';
   const URL = 'http://localhost:8082/resources/upload';
 
@@ -24,15 +28,15 @@ export class UploadComponent {
   uploadForm: FormGroup;
   courses = [];
   filetypes: string[] = Filetypes;
- 
+  semesters: string[]=Semester;
 
   constructor (private coursesService: CoursesService, fb: FormBuilder, private searchservice: SearchService) {
 
     this.uploadForm=fb.group({
             department:['',Validators.compose([Validators.required,uploadValidators.invalidDepartment])],
             course:['',Validators.compose([Validators.required,uploadValidators.invalidCourse])],
-            filetype:['Select Type',Validators.compose([Validators.required,uploadValidators.invalidType])],
-            semester:['Select Semester',Validators.compose([Validators.required,uploadValidators.invalidSemester])],
+            filetype:['',Validators.compose([Validators.required,uploadValidators.invalidType])],
+            semester:['',Validators.compose([Validators.required,uploadValidators.invalidSemester])],
             session:['',Validators.compose([Validators.required,uploadValidators.invalidSession])]
     })
        coursesService.getCourses().subscribe(courses => {this.courses = courses});

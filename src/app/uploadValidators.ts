@@ -14,7 +14,7 @@ export class uploadValidators {
     static invalidType(control: FormControl) {
         var type = control.value;
 
-        if(type=='Select Type')
+        if(type=='Select Filetype')
             return { invalidType: true };
 
         return null;
