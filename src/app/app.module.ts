@@ -17,6 +17,8 @@ import {MdInputModule} from '@angular/material';
 import {MdSelectModule} from '@angular/material';
 import {MdTableModule} from '@angular/material';
 import {MdAutocompleteModule} from '@angular/material';
+import {MdIconModule} from '@angular/material';
+import {MdListModule} from '@angular/material';
 import 'hammerjs';
 
 @NgModule({
@@ -41,9 +43,11 @@ import 'hammerjs';
     MdInputModule,
     MdSelectModule,
     MdTableModule,
-    MdAutocompleteModule
+    MdAutocompleteModule,
+    MdIconModule,
+    MdListModule
 ],
-  exports:[MdButtonModule, MdInputModule, MdToolbarModule, MdSelectModule, MdTableModule,MdAutocompleteModule], 
+  exports:[MdButtonModule, MdInputModule, MdToolbarModule, MdSelectModule, MdTableModule,MdAutocompleteModule,MdIconModule,MdListModule], 
   providers: [CoursesService,SearchService],
   bootstrap: [AppComponent]
 })
