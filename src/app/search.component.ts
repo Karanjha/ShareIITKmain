@@ -6,12 +6,12 @@ import {Filetypes} from './filetypes';
 import {SearchService} from './search.service';
 import {MdInputModule} from '@angular/material';
 import {MdSelectModule} from '@angular/material';
+import {MdAutocompleteModule} from '@angular/material';
 
 @Component({
     selector:'search',
     templateUrl:'./search.component.html',
-    styles:[`
-    `]
+    styleUrls:['./app.component.css']
 })
 
 export class SearchComponent {
@@ -27,7 +27,7 @@ export class SearchComponent {
         
         this.searchForm = fb.group({
             filename: ['',Validators.required],
-            course:['Select Course',Validators.compose([Validators.required,searchValidators.invalidCourse])],
+            course:['',Validators.compose([Validators.required,searchValidators.invalidCourse])],
             filetype:['Select Type',Validators.compose([Validators.required,searchValidators.invalidType])]
         })
         

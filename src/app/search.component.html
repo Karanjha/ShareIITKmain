@@ -1,3 +1,4 @@
+<div class="srch">
 <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
     
     <label for="filename">Filename: </label>
@@ -7,6 +8,7 @@
        
         id="filename"
         formControlName="filename"></md-input-container>
+        &emsp;&emsp;
     
     <label for="filetype">Filetype: </label>
 
@@ -20,20 +22,17 @@
                     {{filetype}}
             </md-option>
     </md-select>
-
-    <label for="Course">Course: </label>
-    
-    <input 
-        list="courses"
-        name="course"
-        onfocus="this.value = this.value=='Select Course'?'':this.value;" 
-        onblur="this.value = this.value==''?'Select Course':this.value;" 
-        class="form-control"
-        id="course"
-        formControlName="course">
-        <datalist id="courses">
-                <option *ngFor="let course of courses" value="{{course}}">
-            </datalist>
+        &emsp;&emsp;
+    <label for="Course">Course: </label>    
+    <md-input-container>
+    <input  type="text" mdInput formControlName="course" [mdAutocomplete]="auto" placeholder="Select Department" required>
+    <md-autocomplete #auto="mdAutocomplete">
+    <md-option *ngFor="let course of courses" [value]="course">
+        {{ course }}
+    </md-option>
+    </md-autocomplete>   
+    </md-input-container>
+    &emsp;&emsp;
     
     <button 
         md-raised-button	 
@@ -47,3 +46,4 @@
     </div>
 
 </form>
+</div>
